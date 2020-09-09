@@ -1,7 +1,7 @@
+
 :root {
   --color-white: #fff;
-  --color-blue: #0a192f;
-  --color-yellow: #f9ca24;
+  --color-black: #000;
 }
 
 *,
@@ -15,7 +15,8 @@
 body {
   color: #fff;
   font: 16px "Cabin", sans-serif;
-  background: var(--color-blue);
+  background: #3282B8;
+
 }
 
 .container {
@@ -32,7 +33,7 @@ body {
   padding: 48px 24px;
   z-index: 1;
   width: 100%;
-  background: var(--color-blue);
+  background: #3282B8;
 }
 
 .nav__menu {
@@ -49,7 +50,6 @@ body {
   text-decoration: none;
   padding: 4px;
   font-size: 14px;
-  cursor: -webkit-grab;
 }
 
 .banner {
@@ -59,22 +59,23 @@ body {
   padding-left: 80px;
   padding-bottom: 80px;
   align-items: flex-end;
-  background: var(--color-blue);
+  background: #3282B8;
+  background-size: cover;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
 .button {
   position: fixed;
-  left: 80px;
-  bottom: 80px;
+  cursor: pointer;
   margin-top: auto;
   width: 80px;
   height: 80px;
-  z-index: 9;
 }
 
 .button__like-text {
-  background: #f9ca24;
+  display: block;
+  background-color: #222;
   color: var(--color-white);
   width: 100%;
   height: 100%;
@@ -98,11 +99,12 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  color: var(--color-white);
+  color: var(--color-black);
 }
 
 .bubble {
   position: fixed;
+  z-index: 2;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -143,14 +145,5 @@ a:focus::after {
 
 .call-action {
   height: 40vh;
-  background: rgba(10, 25, 47, .4);
-  position: relative;
-
-  .button {
-    position: absolute;
-    margin-left: 100px;
-    right: 80px;
-    left: auto;
-    bottom: 80px;
-  }
+  background: #1776b7;
 }

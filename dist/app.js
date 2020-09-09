@@ -93,146 +93,86 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var button = document.querySelector(".button__like-text");
+var bubble = document.querySelector(".bubble");
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var Button = /*#__PURE__*/function () {
-  function Button(node) {
-    _classCallCheck(this, Button);
-
-    this.button = node;
-    this.distance = 80;
-    this.a = 160;
-    this.mouseHasEntered = false;
-    this.mouseIsInButtonTerritory = false;
-    this.init();
-    this.handleEvent();
-  }
-
-  _createClass(Button, [{
-    key: "init",
-    value: function init() {
-      var _this$button$getBound = this.button.getBoundingClientRect(),
-          width = _this$button$getBound.width,
-          height = _this$button$getBound.height,
-          centerPointX = _this$button$getBound.x,
-          centerPointY = _this$button$getBound.y; // gives you width, height, left-X,top-y of the button
+var _button$getBoundingCl = button.getBoundingClientRect(),
+    width = _button$getBoundingCl.width,
+    height = _button$getBoundingCl.height,
+    centerPointX = _button$getBoundingCl.x,
+    centerPointY = _button$getBoundingCl.y; // gives you width, height, left-X,top-y of the button
 
 
-      centerPointX = centerPointX + width / 2; //  center point of button on x-axis
+centerPointX = centerPointX + width / 2; //  center point of button on x-axis
 
-      centerPointY = centerPointY + height / 2; //  center point of button on y-axis
+centerPointY = centerPointY + height / 2; //  center point of button on y-axis
 
-      this.centerPointX = centerPointX;
-      this.centerPointY = centerPointY;
+/*************** Functions ***************/
+
+var distance = 80;
+var mouseHasEntered = true;
+var mouseIsInButtonTerritory;
+
+function mouseMove(e) {
+  var x = e.x; // current x of cursor
+
+  var y = e.y; // current y of cursor
+
+  var leftBorderLine = centerPointX - distance;
+  var rightBorderLine = centerPointX + distance;
+  var topBorderLine = centerPointY - distance;
+  var bottomBorderline = centerPointY + distance;
+  var xWalk = (x - centerPointX) / 2; // the distance to move the button when mouse moves on X axis
+
+  var yWalk = (y - centerPointY) / 2; // the distance to move the button when mouse moves on Y axis
+
+  mouseIsInButtonTerritory = x > leftBorderLine && x < rightBorderLine && y > topBorderLine && y < bottomBorderline; // becomes true if  mouse is inside all of these border-line
+
+  if (mouseIsInButtonTerritory) {
+    if (mouseHasEntered) {
+      // this must happen only once to create outside borderline
+      //creating another level borderline by incresing distance;
+      // while cursor is returing the button comes out of nearest border-line and return from this borderline
+      distance = 160;
+      mouseHasEntered = false;
     }
-  }, {
-    key: "handleEvent",
-    value: function handleEvent() {
-      var _this = this;
 
-      window.addEventListener('mousemove', function (e) {
-        return _this.handleMove(e);
-      });
-      window.addEventListener('mouseout', function () {
-        return _this.handleReset();
-      });
-      window.addEventListener('scroll', function () {
-        return _this.init();
-      }); //  updates the button x,y position
-
-      buttonStates.push({
-        button: this.button,
-        state: this.mouseIsInButtonTerritory
-      });
-    }
-  }, {
-    key: "handleMove",
-    value: function handleMove(e) {
-      var _this2 = this;
-
-      var x = e.x; // current x of cursor
-
-      var y = e.y; // current y of cursor
-
-      var leftBorderLine = this.centerPointX - this.distance;
-      var rightBorderLine = this.centerPointX + this.distance;
-      var topBorderLine = this.centerPointY - this.distance;
-      var bottomBorderline = this.centerPointY + this.distance;
-      this.xWalk = (x - this.centerPointX) / 2; // the distance to move the button when mouse moves on X axis
-
-      this.yWalk = (y - this.centerPointY) / 2; // the distance to move the button when mouse moves on Y axis
-
-      this.mouseIsInButtonTerritory = x > leftBorderLine && x < rightBorderLine && y > topBorderLine && y < bottomBorderline; // becomes true if  mouse is inside all of these border-line
-
-      if (this.mouseIsInButtonTerritory) {
-        if (!this.mouseHasEntered) {
-          //  this must happen only once to create outside borderline
-          //  creating another level borderline by increasing distance;
-          //  while cursor is returning the button comes out of nearest border-line and return from this borderline
-          this.distance = 240;
-          this.mouseHasEntered = true;
-        }
-
-        this.handleCatch(); // when mouse enters the button's territory
-      } else {
-        this.handleReset();
-      }
-
-      var index = buttonStates.findIndex(function (button) {
-        return button.button === _this2.button;
-      });
-      buttonStates[index].state = this.mouseIsInButtonTerritory;
-    }
-  }, {
-    key: "handleCatch",
-    value: function handleCatch() {
-      // translates the button in the direction where cursor is.
-      this.button.style.transform = "translate(".concat(this.xWalk, "px, ").concat(this.yWalk, "px)");
-    }
-  }, {
-    key: "handleReset",
-    value: function handleReset() {
-      // resets the position of the button as it was initial.
-      this.button.style.transform = "translate(".concat(0, "px, ", 0, "px)");
-      if (this.mouseHasEntered) this.distance = 80;
-      this.mouseHasEntered = false; // when button is return to it's position (mouseHasEntered = true) lets to increase the initial borderline of button for the next time
-    }
-  }]);
-
-  return Button;
-}();
-
-var buttons = document.querySelectorAll('.button');
-var bubble = document.querySelector('.bubble');
-var buttonStates = [];
-
-function handleBubble(e) {
-  bubble.style.left = "".concat(e.x, "px");
-  bubble.style.top = "".concat(e.y, "px");
-  var anyOfTheButtonIsHover = buttonStates.some(function (buttonObj) {
-    return buttonObj.state;
-  });
-
-  if (anyOfTheButtonIsHover || e.target.classList.contains("nav__link")) {
-    bubble.classList.add("bubble--big");
-    document.body.style.cursor = '-webkit-grab';
+    catchCursor(xWalk, yWalk); // call the function when mouse in in the button's territory
   } else {
-    bubble.classList.remove("bubble--big");
-    document.body.style.cursor = 'auto';
+    resetPositon();
   }
 }
 
-buttons.forEach(function (button) {
-  var node = button.querySelector('.button__like-text');
-  new Button(node);
-});
+function resetPositon() {
+  // resets the postion of the button as it was initial.
+  button.style.transform = "translate(".concat(0, "px, ", 0, "px)");
+  if (!mouseHasEntered) distance = 80;
+  mouseHasEntered = true; // when button is return to it's position (mouseHasEntered = true) lets to increase the initial borderline of button for the next time
+}
+
+function catchCursor(xWalk, yWalk) {
+  // translates the button in the direction where cursor is.
+  button.style.transform = "translate(".concat(xWalk, "px, ").concat(yWalk, "px)");
+}
+
+function positionTheBubble(e) {
+  bubble.style.left = "".concat(e.x, "px");
+  bubble.style.top = "".concat(e.y, "px");
+
+  if (mouseIsInButtonTerritory || e.target.classList.contains("nav__link")) {
+    bubble.classList.add("bubble--big");
+  } else {
+    bubble.classList.remove("bubble--big");
+  }
+}
+/*************** Event-handler ***************/
+
+
 window.addEventListener("mousemove", function (e) {
-  handleBubble(e);
+  positionTheBubble(e);
+  mouseMove(e);
 });
+window.addEventListener("mouseout", resetPositon);
 
 /***/ }),
 
@@ -254,8 +194,8 @@ window.addEventListener("mousemove", function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\practise\src\js\app.js */"./src/js/app.js");
-module.exports = __webpack_require__(/*! E:\practise\src\sass\app.scss */"./src/sass/app.scss");
+__webpack_require__(/*! E:\magnetCursor\src\js\app.js */"./src/js/app.js");
+module.exports = __webpack_require__(/*! E:\magnetCursor\src\sass\app.scss */"./src/sass/app.scss");
 
 
 /***/ })
