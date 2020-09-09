@@ -1,0 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+body {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #fff;
+  background: #0a192f;
+}
+
+//
+//::-webkit-scrollbar {
+//  width: 0px; /* Remove scrollbar space */
+//  background: transparent; /* Optional: just make scrollbar invisible */
+//}
+//
+///* Optional: show position indicator in red */
+//::-webkit-scrollbar-thumb {
+//  background: #FF0000;
+//}
+
+
+//html {
+//  overflow: scroll;
+//  overflow-x: hidden;
+//}

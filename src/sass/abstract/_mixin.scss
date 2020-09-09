@@ -1,0 +1,92 @@
+@mixin grid($gap, $gridItem,$padding:false) {
+  display: grid;
+  grid-gap: $gap;
+  grid-template-columns: $gridItem;
+  @if ($padding) {
+    padding: $padding;
+  }
+}
+
+@mixin respond($breakpoint) {
+
+  @if $breakpoint == sm {
+    @media (max-width: 576px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == md {
+    @media (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == lg {
+    @media (max-width: 992px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == xlg {
+    @media (max-width: 1024px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == xl {
+    @media (max-width: 1400px) {
+      @content;
+    }
+  }
+}
+
+
+@mixin triangle($color, $direction, $size: 6px) {
+
+  @if $direction == down {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-top: $size solid $color;
+    margin-top: 0 - round( $size / 2.5 );
+  } @else if $direction == up {
+    border-left: $size solid transparent;
+    border-right: $size solid transparent;
+    border-bottom: $size solid $color;
+    margin-bottom: 0 - round( $size / 2.5 );
+  } @else if $direction == right {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-left: $size solid $color;
+    margin-right: -$size;
+  } @else if $direction == left {
+    border-top: $size solid transparent;
+    border-bottom: $size solid transparent;
+    border-right: $size solid $color;
+    margin-left: -$size;
+  }
+}
+
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin truncate($truncation-boundary) {
+  max-width: $truncation-boundary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

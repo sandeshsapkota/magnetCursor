@@ -1,0 +1,28 @@
+.container {
+  width: 980px;
+  margin: 0 auto;
+  max-width: 100%;
+  padding-right: 32px;
+  padding-left: 32px;
+}
+
+.justify-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.items-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+%fullHeightWidth {
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,153 @@
+:root {
+  --color-white: #fff;
+  --color-blue: #0a192f;
+  --color-yellow: #f9ca24;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #fff;
+  font: 16px "Cabin", sans-serif;
+  background: var(--color-blue);
+}
+
+.container {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.flex {
+  display: flex;
+}
+
+.header {
+  position: fixed;
+  padding: 48px 24px;
+  z-index: 1;
+  width: 100%;
+  background: var(--color-blue);
+}
+
+.nav__menu {
+  display: flex;
+  list-style: none;
+}
+
+.nav__item {
+  margin: 0 16px;
+}
+
+.nav__link {
+  color: #fff;
+  text-decoration: none;
+  padding: 4px;
+  font-size: 14px;
+  cursor: -webkit-grab;
+}
+
+.banner {
+  display: flex;
+  height: 100vh;
+  position: relative;
+  padding-left: 80px;
+  padding-bottom: 80px;
+  align-items: flex-end;
+  background: var(--color-blue);
+  overflow: hidden;
+}
+
+.button {
+  position: fixed;
+  left: 80px;
+  bottom: 80px;
+  margin-top: auto;
+  width: 80px;
+  height: 80px;
+  z-index: 9;
+}
+
+.button__like-text {
+  background: #f9ca24;
+  color: var(--color-white);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: 0.2s transform;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.button__num-text {
+  display: block;
+  transform: translateY(-130%);
+  text-align: center;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: var(--color-white);
+}
+
+.bubble {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.4);
+  transition: height 0.4s, width 0.4s, background-color 0.4s, all 0.2s;
+  z-index: 9999;
+}
+
+.bubble--big {
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: height 0.4s, width 0.4s, background-color 0.4s;
+}
+
+a:focus {
+  outline: none;
+  position: relative;
+}
+
+a:focus::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.1);
+  width: 100px;
+  height: 100px;
+}
+
+.call-action {
+  height: 40vh;
+  background: rgba(10, 25, 47, 0.4);
+  position: relative;
+}
+.call-action .button {
+  position: absolute;
+  margin-left: 100px;
+  right: 80px;
+  left: auto;
+  bottom: 80px;
+}
